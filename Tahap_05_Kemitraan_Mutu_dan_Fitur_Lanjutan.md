@@ -175,7 +175,7 @@ CREATE INDEX idx_ai_messages_session ON ai_chat_messages(session_id);
 5. **Antarmuka Tutor AI Santri (`/student/ai-tutor`)**:
    - Tampilan chat modern, ramah, dan bebas gangguan.
    - Rekomendasi topik tanya-jawab seputar mata pelajaran kesetaraan atau kajian adab & tahfizh.
-   - Tombol "Tanyakan ke Ustadz Nyata" jika santri membutuhkan konsultasi lebih mendalam.
+   - Tombol "Konsultasi Bersama Ustadz Pembimbing" jika santri membutuhkan konsultasi lebih mendalam.
 
 ---
 
