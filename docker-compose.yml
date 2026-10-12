@@ -1,4 +1,4 @@
-﻿version: '3.8'
+version: '3.8'
 
 services:
   db:
@@ -6,8 +6,14 @@ services:
     container_name: pkbm_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: pkbm_digital_darel_iman
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${DB_NAME:-pkbm_digital_darel_iman}
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$${MYSQL_ROOT_PASSWORD} || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     ports:
       - "3306:3306"
     volumes:
@@ -23,16 +29,17 @@ services:
     environment:
       PORT: 8080
       DB_USER: root
-      DB_PASSWORD: rootpassword
+      DB_PASSWORD: ${DB_PASSWORD:-rootpassword}
       DB_HOST: db
       DB_PORT: 3306
-      DB_NAME: pkbm_digital_darel_iman
-      JWT_SECRET: dar-el-iman-secret-key-2027-2032
+      DB_NAME: ${DB_NAME:-pkbm_digital_darel_iman}
+      JWT_SECRET: ${JWT_SECRET:-dar-el-iman-secret-key-2027-2032}
       FRONTEND_URL: "*"
     ports:
       - "8080:8080"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   frontend:
     build:
