@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PKBM Digital Dar El Iman — Prototipe UI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1f5f4;--card:#fff;--line:#e2e8e6;--tx:#0f1f1a;--mut:#64748b;--em:#047857;--em2:#065f46;--soft:#e6f4ee;--gold:#b8892b;--goldsoft:#fbf3dc;--warn:#b45309;--bad:#be123c;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1210;--card:#121c18;--line:#22332d;--tx:#e7f0ec;--mut:#8fa79d;--em:#34d399;--em2:#10b981;--soft:#12322a;--gold:#e0b252;--goldsoft:#2b2411;--warn:#fbbf24;--bad:#fb7185}}
+:root[data-theme="dark"]{--bg:#0b1210;--card:#121c18;--line:#22332d;--tx:#e7f0ec;--mut:#8fa79d;--em:#34d399;--em2:#10b981;--soft:#12322a;--gold:#e0b252;--goldsoft:#2b2411;--warn:#fbbf24;--bad:#fb7185}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--tx);font:14px/1.5 'Plus Jakarta Sans',system-ui,sans-serif;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+#app{display:flex;height:100%}
+aside{width:264px;background:var(--card);border-right:1px solid var(--line);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0;transition:transform .2s;z-index:30}
+.brand{display:flex;gap:10px;align-items:center;padding:16px;border-bottom:1px solid var(--line)}
+.logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--em),#0f766e);display:grid;place-items:center;color:#fff;font-weight:800;box-shadow:inset 0 0 0 2px rgba(224,178,82,.7)}
+.brand b{display:block;font-size:14px;line-height:1.2}.brand small{color:var(--mut);font-size:11px}
+.grp{padding:14px 12px 4px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-weight:700}
+.nav{display:flex;align-items:center;gap:10px;width:calc(100% - 16px);margin:1px 8px;padding:8px 10px;border-radius:10px;text-align:left;color:var(--tx)}
+.nav:hover{background:var(--bg)}
+.nav.on{background:var(--soft);color:var(--em);font-weight:700;box-shadow:inset 3px 0 0 var(--em)}
+.nav .t{flex:1}.nav .tag{font-size:9.5px;padding:1px 6px;border-radius:99px;background:var(--bg);color:var(--mut);border:1px solid var(--line)}
+.nav.lock{opacity:.5}
+.main{flex:1;display:flex;flex-direction:column;min-width:0}
+header{height:62px;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:0 18px;flex-shrink:0;position:relative;z-index:20}
+.sp{flex:1}
+.ib{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;position:relative}
+.ib:hover{background:var(--bg)}
+.dot{position:absolute;top:-4px;right:-4px;background:var(--bad);color:#fff;font-size:10px;border-radius:99px;padding:0 5px;font-weight:700}
+.pill{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:5px 10px;font-size:12px}
+.pill b{font-size:13px}
+.menu{position:absolute;top:56px;right:0;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.14);min-width:230px;padding:6px;display:none}
+.menu.open{display:block}
+.menu button{display:flex;width:100%;gap:8px;align-items:center;padding:8px 10px;border-radius:8px;text-align:left}
+.menu button:hover,.menu button.on{background:var(--soft)}
+.menu hr{border:0;border-top:1px solid var(--line);margin:6px 0}
+.rel{position:relative}
+.role{font-size:10px;font-weight:700;padding:1px 7px;border-radius:99px;background:var(--goldsoft);color:var(--gold);border:1px solid var(--gold)}
+.av{width:34px;height:34px;border-radius:50%;background:var(--em);color:#fff;display:grid;place-items:center;font-weight:700}
+#ws{flex:1;overflow-y:auto;padding:22px}
+.wrap{max-width:1180px;margin:auto}
+h1{font-size:22px;font-weight:800}h2{font-size:15px;font-weight:700}
+.sub{color:var(--mut)}
+.head{display:flex;gap:12px;align-items:flex-end;margin-bottom:18px;flex-wrap:wrap}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.g{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.g3{grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.stat b{display:block;font-size:26px;font-weight:800;color:var(--em)}
+.chip{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:var(--soft);color:var(--em);font-weight:600}
+.chip.w{background:var(--goldsoft);color:var(--warn)}.chip.m{background:var(--bg);color:var(--mut);border:1px solid var(--line)}
+.btn{padding:9px 14px;border-radius:10px;background:var(--em);color:#fff;font-weight:700}
+.dark-btn-fix{color:#fff}
+:root[data-theme="dark"] .btn{color:#06241a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#06241a}}
+.btn.o{background:none;border:1px solid var(--line);color:var(--tx)}
+:root[data-theme="dark"] .btn.o{color:var(--tx)}
+.tg{width:44px;height:25px;border-radius:99px;background:var(--line);position:relative;flex-shrink:0;transition:.2s}
+.tg::after{content:"";position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:.2s}
+.tg.on{background:var(--em)}.tg.on::after{left:22px}
+.mod{display:flex;flex-direction:column;gap:10px}
+.mod.off{opacity:.65}
+.row{display:flex;align-items:center;gap:10px}
+.bar{height:8px;border-radius:9px;background:var(--bg);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--em),var(--gold));border-radius:9px}
+.ring{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--em) calc(var(--p)*1%),var(--bg) 0)}
+.ring span{width:86px;height:86px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:24px;font-weight:800}
+.live{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.live:first-of-type{border-top:0}
+.tm{min-width:74px;font-weight:800;font-size:17px}
+.ar{font-family:'Amiri',serif;direction:rtl;text-align:center;font-size:34px;line-height:2.1;color:var(--tx)}
+.ayah{background:linear-gradient(180deg,var(--goldsoft),var(--card));border:1px solid var(--gold);border-radius:16px;padding:14px}
+.star{font-size:26px;color:var(--line)}.star.on{color:var(--gold)}
+.ck{display:flex;gap:8px;align-items:center;padding:7px 10px;border:1px solid var(--line);border-radius:10px;cursor:pointer;user-select:none}
+.ck.on{background:var(--soft);border-color:var(--em);color:var(--em);font-weight:600}
+textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--tx);padding:10px;font:inherit;resize:vertical}
+.chart{display:flex;align-items:flex-end;gap:10px;height:150px;padding-top:10px}
+.chart div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative;font-size:11px;color:var(--mut)}
+.chart i{width:100%;max-width:34px;background:var(--em);border-radius:7px 7px 0 0}
+.chart u{position:absolute;left:0;right:0;border-top:2px dashed var(--gold)}
+.sl{display:flex;align-items:center;gap:10px;padding:9px;border-radius:10px;width:100%;text-align:left}
+.sl.on{background:var(--soft)}
+#toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--em);color:#fff;padding:10px 18px;border-radius:12px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:90vw}
+:root[data-theme="dark"] #toast{color:#06241a}
+#toast.s{opacity:1}
+#hb{display:none}
+#ov{display:none}
+@media(max-width:860px){
+aside{position:fixed;inset:0 auto 0 0;transform:translateX(-100%);padding-top:env(safe-area-inset-top,0px)}
+aside.open{transform:none;box-shadow:0 0 0 100vmax rgba(0,0,0,.4)}
+#hb{display:grid}.hide-m{display:none}
+#ws{padding:14px}header{padding:0 12px}
+}
+.btn{display:inline-flex;align-items:center;gap:6px}.ck::before{content:"";width:14px;height:14px;border:1.5px solid var(--mut);border-radius:4px;flex-shrink:0}.ck.on::before{background:var(--em);border-color:var(--em)}.nav svg{color:var(--mut)}.nav.on svg{color:var(--em)}.card{padding:18px}.nav{font-size:13.5px}
+</style>
+</head>
+<body>
+<div id="app">
+<aside id="sb"></aside>
+<div class="main">
+<header>
+<button id="hb" class="ib" onclick="sb.classList.toggle('open')" aria-label="Menu"></button>
+<div class="sp"></div>
+<div class="rel"><button class="pill" onclick="mn('tzm')"><span id="fl" style="font-size:18px"></span><span><b id="clk"></b> <span class="hide-m sub" id="tzn"></span></span></button><div class="menu" id="tzm"></div></div>
+<button class="ib" onclick="tgl()" aria-label="Mode gelap" id="thm"></button>
+<div class="rel"><button class="ib" id="bl" onclick="mn('ntm')" aria-label="Notifikasi"></button>
+<div class="menu" id="ntm"><div style="padding:8px 10px;font-weight:700">Notifikasi</div>
+<button> Pengumuman PPDB gelombang 2 dibuka</button><button> Ujian Paket B dijadwalkan Kamis</button><button> Setoran Anda dijadwalkan 16.00</button></div></div>
+<div class="rel"><button class="row" onclick="mn('prm')"><div class="av" id="avt"></div><div class="hide-m" style="text-align:left;line-height:1.25"><b id="pn"></b><br><span class="role" id="pr"></span></div></button>
+<div class="menu" id="prm"></div></div>
+</header>
+<main id="ws"></main>
+</div>
+</div>
+<div id="toast"></div>
+<script>
+const TZ=[['Asia/Jakarta','WIB','🇮🇩','Jakarta'],['Asia/Kuala_Lumpur','MYT','🇲🇾','Kuala Lumpur'],['Asia/Riyadh','AST','🇸🇦','Riyadh / Makkah'],['Europe/Amsterdam','CET','🇳🇱','Amsterdam'],['America/New_York','ET','🇺🇸','New York'],['Australia/Sydney','AEDT','🇦🇺','Sydney']];
+const MODS={ppdb:['PPDB Online','clip','1.4.2',[],'Pendaftaran & seleksi santri baru'],lms:['LMS Kelas Digital','cap','2.1.0',[],'Materi, tugas & kelas live'],tahfizh:['Halaqah Tahfizh','book','1.2.0',['lms'],'Setoran, tajwid & target juz'],cbt:['CBT Ujian Online','file','2.0.3',['lms'],'Ujian berbasis komputer'],raport:['Raport & Penilaian','chart','1.6.0',['cbt'],'Nilai, kesetaraan Paket A/B/C'],absensi:['Absensi Digital','check','1.1.1',['ppdb'],'Kehadiran kelas & halaqah'],spp:['SPP & Tagihan','card','1.8.0',['ppdb'],'Tagihan, pembayaran, kuitansi'],kemitraan:['Kemitraan & Donasi','heart','0.9.0',['spp'],'Donatur, wakaf & beasiswa'],dapodik:['Sinkron Dapodik','link','1.3.0',['ppdb','raport'],'Integrasi data pokok pendidikan'],mutu:['Mutu & Akreditasi','award','1.0.4',['raport'],'Evaluasi diri & audit mutu']};
+const on={ppdb:1,lms:1,tahfizh:1,cbt:1,raport:1,absensi:1,spp:1,kemitraan:0,dapodik:1,mutu:0};
+const NAV=[['PPDB & Kesiswaan','',[['Pendaftaran PPDB','ppdb','asu','','clip'],['Data Santri','ppdb','au','','user'],['Absensi','absensi','au','','check']]],
+['Akademik & LMS','',[['Kelas Saya','lms','asu','B','cap'],['Halaqah Tahfizh','tahfizh','asu','C','book'],['Jadwal Live','lms','asu','','video']]],
+['Ujian & Penilaian','',[['CBT Online','cbt','asu','','file'],['Raport & Nilai','raport','asu','','chart']]],
+['Keuangan & Kemitraan','',[['SPP & Tagihan','spp','as','','card'],['Kemitraan & Donasi','kemitraan','a','','heart']]],
+['Mutu & Administrasi','',[['Manajemen Modul','core','a','A','grid'],['Sinkron Dapodik','dapodik','a','','link'],['Mutu & Akreditasi','mutu','a','','award']]]];
+const ROLES={a:['Super Admin','Admin Yayasan','A','A'],s:['Santri','Ahmad Fauzan','S','B'],u:['Ustadz','Ust. Abdullah','U','C']};
+const S={r:'a',v:'A',tz:0,sant:0,star:4,tj:{},santri:[['Ahmad Fauzan','Al-Mulk 1–5',0],['Maryam Salsabila','Al-Mulk 6–10',1],['Yusuf Al-Ghifari','Al-Mulk 11–15',0],['Aisyah Nur','Al-Mulk 16–20',1]]};
+const AYAT=['تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ','الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا وَهُوَ الْعَزِيزُ الْغَفُورُ'];
+const $=id=>document.getElementById(id);
+const P={"user": "<path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\"/><circle cx=\"9\" cy=\"7\" r=\"4\"/><path d=\"M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8\"/>", "clip": "<rect x=\"8\" y=\"2\" width=\"8\" height=\"4\" rx=\"1\"/><path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\"/>", "check": "<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m9 12 2 2 4-4\"/>", "cap": "<path d=\"M22 10 12 5 2 10l10 5 10-5z\"/><path d=\"M6 12v5c3 2 9 2 12 0v-5\"/>", "book": "<path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z\"/>", "video": "<rect x=\"2\" y=\"6\" width=\"14\" height=\"12\" rx=\"2\"/><path d=\"m22 8-6 4 6 4z\"/>", "file": "<path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"/><path d=\"M14 2v6h6M9 13h6M9 17h6\"/>", "chart": "<path d=\"M3 3v18h18\"/><path d=\"M7 15v3M12 9v9M17 5v13\"/>", "card": "<rect x=\"2\" y=\"5\" width=\"20\" height=\"14\" rx=\"2\"/><path d=\"M2 10h20\"/>", "heart": "<path d=\"M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z\"/>", "grid": "<rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/>", "link": "<path d=\"M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7\"/><path d=\"M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7\"/>", "award": "<circle cx=\"12\" cy=\"8\" r=\"6\"/><path d=\"M15.5 13.5 17 22l-5-3-5 3 1.5-8.5\"/>", "lock": "<rect x=\"4\" y=\"11\" width=\"16\" height=\"10\" rx=\"2\"/><path d=\"M8 11V7a4 4 0 0 1 8 0v4\"/>", "bell": "<path d=\"M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9\"/><path d=\"M10.3 21a2 2 0 0 0 3.4 0\"/>", "moon": "<path d=\"M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z\"/>", "sun": "<circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4\"/>", "menu": "<path d=\"M4 6h16M4 12h16M4 18h16\"/>", "play": "<path d=\"m6 4 14 8-14 8z\"/>", "mic": "<rect x=\"9\" y=\"2\" width=\"6\" height=\"12\" rx=\"3\"/><path d=\"M5 11a7 7 0 0 0 14 0M12 18v4\"/>"};
+const ic=(n,z=18)=>`<svg width="${z}" height="${z}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">${P[n]}</svg>`;
+function toast(m){const t=$('toast');t.textContent=m;t.className='s';clearTimeout(t._h);t._h=setTimeout(()=>t.className='',2600)}
+function mn(id){document.querySelectorAll('.menu').forEach(m=>m.id==id?m.classList.toggle('open'):m.classList.remove('open'))}
+document.addEventListener('click',e=>{if(!e.target.closest('.rel'))document.querySelectorAll('.menu').forEach(m=>m.classList.remove('open'))});
+function tgl(){const r=document.documentElement;const d=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=d?'light':'dark';$('thm').innerHTML=ic(d?'moon':'sun')}
+function go(v){S.v=v;sb.classList.remove('open');draw()}
+function role(r){S.r=r;S.v=ROLES[r][3];draw();toast('Peran aktif: '+ROLES[r][0])}
+function tzset(i){S.tz=i;draw()}
+function tog(k){const m=MODS[k];
+if(!on[k]){const miss=m[3].filter(d=>!on[d]);if(miss.length)return toast('Aktifkan dulu: '+miss.map(d=>MODS[d][0]).join(', '));on[k]=1;toast(m[0]+' diaktifkan — menu muncul di sidebar')}
+else{let n=[];const off=x=>{on[x]=0;Object.keys(MODS).forEach(y=>{if(on[y]&&MODS[y][3].includes(x)){n.push(MODS[y][0]);off(y)}})};off(k);toast(m[0]+' dinonaktifkan'+(n.length?' (+ '+n.join(', ')+')':''))}
+draw()}
+function fmt(h,m,tz){const d=new Date(new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Jakarta'})+'T'+h+':'+m+':00+07:00');
+const o={timeZone:TZ[tz][0]};const t=d.toLocaleTimeString('en-GB',{...o,hour:'2-digit',minute:'2-digit'});
+const day=d.toLocaleDateString('en-CA',o)!=d.toLocaleDateString('en-CA',{timeZone:'Asia/Jakarta'});return [t,day?' (+1 hari)':'',d]}
+function side(){const ro=S.r;let h=`<div class="brand"><div class="logo">DI</div><div><b>PKBM Digital<br>Dar El Iman</b><small>Paket A · B · C</small></div></div>`;
+NAV.forEach(([g,_,its])=>{const vis=its.filter(i=>i[1]=='core'||on[i[1]]);h+=`<div class="grp">${g}</div>`;
+vis.forEach(i=>{const ok=i[2].includes(ro);h+=`<button class="nav ${S.v==i[3]&&i[3]?'on':''} ${ok?'':'lock'}" onclick="${ok?(i[3]?`go('${i[3]}')`:`toast('Halaman ${i[0]} di luar cakupan prototipe')`):`toast(' Peran ${ROLES[ro][0]} tidak memiliki akses ke ${i[0]}')`}">${ic(i[4])}<span class="t">${i[0]}</span>${ok?'':ic('lock',14)}</button>`});
+if(!vis.length)h+=`<div style="padding:4px 18px;color:var(--mut);font-size:12px">Semua modul pilar ini nonaktif</div>`});
+sb.innerHTML=h+`<div style="height:16px"></div>`}
+function topbar(){const t=TZ[S.tz];$('fl').textContent=t[2];$('tzn').textContent=t[1]+' · '+t[3];
+$('tzm').innerHTML=`<div style="padding:8px 10px;font-weight:700">Zona waktu tampilan</div>`+TZ.map((z,i)=>`<button class="${i==S.tz?'on':''}" onclick="tzset(${i})">${z[2]} ${z[3]} <span class="sub">${z[1]}</span></button>`).join('')+`<hr><div style="padding:4px 10px;font-size:11px" class="sub">Otomatis terdeteksi dari perangkat. Santri diaspora melihat jadwal dalam jam lokal.</div>`;
+const r=ROLES[S.r];$('avt').textContent=r[1][0]=='A'&&S.r=='a'?'A':r[1].replace('Ust. ','')[0];$('pn').textContent=r[1];$('pr').textContent=r[0];
+$('prm').innerHTML=`<div style="padding:8px 10px"><b>${r[1]}</b><br><span class="role">${r[0]}</span></div><hr><div style="padding:4px 10px;font-size:11px" class="sub">GANTI PERAN (DEMO)</div>`+Object.keys(ROLES).map(k=>`<button class="${k==S.r?'on':''}" onclick="role('${k}')">${ROLES[k][0]}</button>`).join('')+`<hr><button> Pengaturan Akun</button><button> Keluar</button>`;
+tick()}
+function tick(){$('clk').textContent=new Date().toLocaleTimeString('en-GB',{timeZone:TZ[S.tz][0],hour:'2-digit',minute:'2-digit'})}
+setInterval(tick,15000);
+function vA(){const n=Object.keys(on).filter(k=>on[k]).length;
+return `<div class="wrap"><div class="head"><div><h1>Manajemen Modul</h1><p class="sub">Aktifkan fitur sesuai kebutuhan lembaga. Modul dengan prasyarat tidak bisa aktif sebelum dependensinya aktif.</p></div><div class="sp"></div><button class="btn" onclick="toast('Konfigurasi disimpan (demo)')">Simpan Konfigurasi</button></div>
+<div class="g g4" style="margin-bottom:14px"><div class="card stat"><span class="sub">Modul aktif</span><b>${n} / ${Object.keys(MODS).length}</b></div><div class="card stat"><span class="sub">Santri terdaftar</span><b>1.284</b></div><div class="card stat"><span class="sub">Diaspora (luar negeri)</span><b>186</b></div><div class="card stat"><span class="sub">Versi platform</span><b>v3.2.0</b></div></div>
+<div class="g g3">${Object.entries(MODS).map(([k,m])=>{const miss=m[3].filter(d=>!on[d]);return `<div class="card mod ${on[k]?'':'off'}"><div class="row"><div style="width:40px;height:40px;border-radius:11px;background:var(--soft);color:var(--em);display:grid;place-items:center">${ic(m[1],20)}</div><div style="flex:1"><h2>${m[0]}</h2><span class="chip m">v${m[2]}</span></div><button class="tg ${on[k]?'on':''}" onclick="tog('${k}')" aria-label="Toggle ${m[0]}"></button></div>
+<p class="sub" style="font-size:13px">${m[4]}</p>
+<div style="font-size:12px">${m[3].length?'Prasyarat: '+m[3].map(d=>`<span class="chip ${on[d]?'':'w'}">${MODS[d][0]}</span>`).join(' '):'<span class="chip m">Tanpa prasyarat</span>'}</div>
+<div class="row"><span class="chip ${on[k]?'':'w'}">${on[k]?'Aktif':miss.length?'Prasyarat belum aktif':'Nonaktif'}</span></div></div>`}).join('')}</div></div>`}
+function vB(){const cl=[['08','00','Matematika — Paket B Kls 8','Ust. Rahmat'],['10','30','Bahasa Arab Dasar','Ustadzah Nabila'],['19','30','Fiqih Ibadah (Kelas Karyawan)','Ust. Salman']];
+const nowW=new Date();
+return `<div class="wrap"><div class="head"><div><h1>Assalamu'alaikum, Ahmad </h1><p class="sub">Paket B · Kelas 8 · Semester Ganjil 2026/2027</p></div></div>
+<div class="g g2"><div class="card"><h2 style="margin-bottom:12px">Progres Belajar</h2><div class="row" style="gap:20px;flex-wrap:wrap"><div class="ring" style="--p:68"><span>68%</span></div><div style="flex:1;min-width:180px;display:grid;gap:10px">${[['Matematika',72],['Bahasa Indonesia',80],['PAI & Tahfizh',64],['IPA',51]].map(a=>`<div><div class="row" style="justify-content:space-between;font-size:12px"><span>${a[0]}</span><b>${a[1]}%</b></div><div class="bar"><i style="width:${a[1]}%"></i></div></div>`).join('')}</div></div></div>
+<div class="card"><div class="row" style="margin-bottom:6px"><h2>Kelas Live Hari Ini</h2><div class="sp"></div><span class="chip">${TZ[S.tz][2]} ${TZ[S.tz][1]}</span></div>
+${cl.map(c=>{const [t,d,dt]=fmt(c[0],c[1],S.tz);const diff=(nowW-dt)/6e4;const st=diff>=0&&diff<60?['Live sekarang',''] :diff<0?['Akan datang','w']:['Selesai','m'];
+return `<div class="live"><div class="tm">${t}<div style="font-size:10px;font-weight:500" class="sub">${d}</div></div><div style="flex:1"><b>${c[2]}</b><div class="sub" style="font-size:12px">${c[3]} · asli ${c[0]}.${c[1]} WIB</div></div>${st[0]=='Live sekarang'?`<button class="btn" onclick="toast('Membuka ruang kelas…')">Gabung</button>`:`<span class="chip ${st[1]}">${st[0]}</span>`}</div>`}).join('')}</div></div>
+<div class="g g2" style="margin-top:14px"><div class="card"><div class="row" style="margin-bottom:8px"><h2>Setoran Hafalan</h2><div class="sp"></div><span class="chip w">Juz 29</span></div>
+<div class="ayah"><div class="ar" style="font-size:28px">${AYAT[0]}</div><div class="sub" style="text-align:center;font-size:12px">QS. Al-Mulk : 1</div></div>
+<div class="row" style="margin:12px 0 6px;justify-content:space-between"><span>Target pekan ini: ayat 1–5</span><b>3/5</b></div><div class="bar"><i style="width:60%"></i></div>
+<div class="row" style="margin-top:12px"><span class="sub" style="flex:1;font-size:12px">Jadwal setoran: Kamis 16.00 WIB bersama Ust. Abdullah</span><button class="btn" onclick="toast('Permintaan setoran dikirim ke ustadz')">Ajukan Setoran</button></div></div>
+<div class="card"><h2 style="margin-bottom:8px">Tugas & Ujian</h2>
+${[['','Tugas Aljabar Bab 3','Besok, 23.59','w'],['file','Ujian Tengah Semester IPA (CBT)','Kamis, 09.00','w'],['book','Rekaman murajaah Al-Mulk 1–5','Jumat','m'],['check','Kuis Bahasa Indonesia','Selesai · 88','']].map(t=>`<div class="live"><div style="flex:1"><b style="font-size:13px">${t[1]}</b></div><span class="chip ${t[3]}">${t[2]}</span></div>`).join('')}</div></div></div>`}
+function vC(){const s=S.santri[S.sant];const ck=['Mad','Ghunnah','Qalqalah','Makhraj','Waqaf & Ibtida','Idgham'];
+const ach=[0.5,1.1,1.6,2.1,2.6,3.0],tg=[0.6,1.2,1.8,2.4,3.0,3.5],mo=['Mei','Jun','Jul','Agu','Sep','Okt'];
+return `<div class="wrap"><div class="head"><div><h1>Ruang Halaqah Tahfizh</h1><p class="sub">Halaqah Al-Furqan · Ust. Abdullah · Kamis, 16.00 WIB</p></div></div>
+<div class="g" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
+<div class="card" style="align-self:start"><h2 style="margin-bottom:8px">Antrean Setoran</h2>${S.santri.map((x,i)=>`<button class="sl ${i==S.sant?'on':''}" onclick="S.sant=${i};S.tj={};draw()"><div class="av">${x[0][0]}</div><div style="flex:1"><b>${x[0]}</b><div class="sub" style="font-size:12px">${x[1]}</div></div>${i==S.sant?'<span class="chip">Menyimak</span>':''}</button>`).join('')}</div>
+<div class="card" style="grid-column:span 2;min-width:min(100%,420px)"><div class="row" style="margin-bottom:10px"><h2>Menyimak: ${s[0]}</h2><div class="sp"></div><span class="chip w">${s[1]}</span></div>
+<div class="ayah"><div class="ar">${AYAT[s[2]]}</div></div>
+<div class="row" style="justify-content:center;margin:12px 0"><button class="btn o" onclick="toast('Memutar rekaman santri…')">${ic('play',14)} Putar rekaman</button><button class="btn" onclick="toast('Mulai merekam penilaian…')">${ic('mic',14)} Rekam</button></div>
+<div style="margin-bottom:10px"><b style="font-size:12px" class="sub">KELANCARAN</b><div>${[1,2,3,4,5].map(n=>`<button class="star ${n<=S.star?'on':''}" onclick="S.star=${n};draw()">★</button>`).join('')}</div></div>
+<b style="font-size:12px" class="sub">CATATAN TAJWID (centang bila perlu perbaikan)</b>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px">${ck.map(c=>`<button class="ck ${S.tj[c]?'on':''}" onclick="S.tj['${c}']=!S.tj['${c}'];draw()">${c}</button>`).join('')}</div>
+<textarea rows="3" placeholder="Catatan ustadz untuk santri…"></textarea>
+<div class="row" style="margin-top:12px;justify-content:flex-end"><button class="btn o" onclick="toast('Setoran diulang')">Ulangi</button><button class="btn" onclick="toast('Setoran ${s[0]} tersimpan ')">Simpan & Lanjut</button></div></div></div>
+<div class="card" style="margin-top:14px"><div class="row"><h2>Capaian vs Target Juz — ${s[0]}</h2><div class="sp"></div><span class="chip">Target tahunan: 5 juz</span></div>
+<div class="chart">${ach.map((a,i)=>`<div><u style="bottom:calc(${tg[i]/4*100}% * .82 + 18px)"></u><i style="height:calc(${a/4*100}% * .82)"></i><span>${a}</span><span>${mo[i]}</span></div>`).join('')}</div>
+<p class="sub" style="font-size:12px;margin-top:8px">Batang = capaian kumulatif (juz) · garis putus-putus emas = target</p></div></div>`}
+function draw(){side();topbar();$('ws').innerHTML=S.v=='A'?vA():S.v=='B'?vB():vC();$('ws').scrollTop=0}
+$('hb').innerHTML=ic('menu');$('bl').innerHTML=ic('bell')+'<span class="dot">3</span>';$('thm').innerHTML=ic(matchMedia('(prefers-color-scheme:dark)').matches?'sun':'moon');
+draw();
+</script>
+</body>
+</html>
