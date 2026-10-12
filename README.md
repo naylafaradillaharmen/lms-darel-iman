@@ -24,7 +24,7 @@ Sistem dirancang ramah bagi santri mukim di pesantren maupun **santri diaspora**
 
 ---
 
-## ✨ Fitur Utama
+## Fitur Utama Sistem
 
 - 🔐 **Autentikasi & Keamanan Ketat:**
   - Token JWT berbasis sesi terenkripsi dengan validasi ketat (pencegahan bypass kata sandi).
